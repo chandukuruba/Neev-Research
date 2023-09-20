@@ -1,0 +1,43 @@
+.para {
+  color: #bfc3c7;
+  text-align: center;
+  width: 60vw;
+}
+.packages {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.package-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0px 4px 16px 0px #afafaf;
+  width: 30vh;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: white;
+  height: 30vh;
+  color: #5d5f61;
+  margin: 30px;
+}
+.package-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.reviews {
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .packages {
+    flex-direction: column;
+  }
+  .package-item {
+    width: 80%;
+  }
+}

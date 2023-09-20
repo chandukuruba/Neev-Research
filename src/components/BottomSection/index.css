@@ -1,0 +1,80 @@
+.bottom-section {
+  color: white;
+  background-color: black;
+  padding: 20px;
+  padding-top: 40px;
+  display: flex;
+}
+.x-logo {
+  width: 50px;
+  margin-bottom: 10px;
+}
+.number-input-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 40px;
+}
+.number-input {
+  width: 200px;
+  height: 40px;
+  border-left: solid white;
+  background-color: #a3a4ad;
+}
+.button-logo {
+  color: white;
+  background-color: #2a87eb;
+  height: 40px;
+  width: 60px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.number {
+  background-color: #a3a4ad;
+  color: white;
+  text-align: center;
+  width: 50px;
+  height: 39px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.phone {
+  width: 40vw;
+  margin: 30px;
+}
+.others {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+}
+.line {
+  border: solid #a3a4ad;
+  width: 95%;
+  margin: 0px;
+}
+.bottom {
+  background-color: black;
+  color: white;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+}
+.rights {
+  margin: 20px;
+}
+@media (max-width: 768px) {
+  .bottom-section {
+    display: flex;
+    flex-direction: column;
+  }
+  .phone {
+    width: 90vw;
+  }
+  .others {
+    flex-shrink: 1;
+  }
+}
