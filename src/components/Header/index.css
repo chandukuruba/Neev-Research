@@ -1,8 +1,40 @@
 .company-logo {
-  width: 50px;
+  width: 214px;
+  height: 64px;
+  flex-shrink: 0;
+  align-self: center;
 }
-@media (min-width: 768px) {
+.logo-container {
+  display: flex;
+  width: 277px;
+  height: 64px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+.x-logo {
+  width: 63px;
+  height: 64px;
+  flex-shrink: 0;
+  align-self: center;
+}
+@media (max-width: 768px) {
+  .logo-container {
+    display: flex;
+    width: 127px;
+    height: 29px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-shrink: 0;
+  }
+  .x-logo {
+    width: 28.884px;
+    height: 29px;
+    flex-shrink: 0;
+  }
   .company-logo {
-    width: 80px;
+    width: 98.116px;
+    height: 29px;
+    flex-shrink: 0;
   }
 }

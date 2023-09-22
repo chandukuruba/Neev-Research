@@ -5,14 +5,17 @@ import './index.css'
 const BestInClass = () => (
   <>
     <div className="best-mobile">
-      <div>
-        <h1>
+      <div className="input-holder">
+        <h1 className="style-head">
           <span className="head-span">Best in class</span> lab tests!
         </h1>
-      </div>
-      <div className="input-container">
-        <p>Fill in the details to get a call</p>
-        <form>
+        <p className="discount">Get Full Body Check up Now at</p>
+        <p className="discount-price">
+          <span className="line-through">$5,999 </span>
+          {` `} $900 70% off
+        </p>
+        <form className="input-container">
+          <p className="info">Fill in the details to get a call</p>
           <div>
             <BsPerson className="input-logo" />
             <input type="test" placeholder="Full name" className="input" />
@@ -25,12 +28,15 @@ const BestInClass = () => (
             <MdOutlineLocationOn className="input-logo" />
             <input type="test" placeholder="Location" className="input" />
           </div>
-          <input type="checkbox" id="checkbox" className="check" />
-          <label htmlFor="checkbox">
-            By continuing you agree to our <span className="terms"> T&C </span>
-            and
-            <span className="terms"> Privacy policy</span>
-          </label>
+          <div>
+            <input type="checkbox" id="checkbox" className="input-checkbox" />
+            <label htmlFor="checkbox" className="label">
+              By continuing you agree to our
+              <span className="terms"> T&C </span>
+              and
+              <span className="terms"> Privacy policy</span>
+            </label>
+          </div>
           <br />
           <button type="submit" className="input-button">
             Proceed
@@ -39,9 +45,9 @@ const BestInClass = () => (
       </div>
     </div>
     <div className="best-desktop">
-      <div className="input-container">
-        <p>Fill in the details to get a call</p>
-        <form>
+      <div className="input-holder">
+        <form className="input-container">
+          <p className="info">Fill in the details to get a call</p>
           <div>
             <BsPerson className="input-logo" />
             <input type="test" placeholder="Full name" className="input" />
@@ -54,20 +60,34 @@ const BestInClass = () => (
             <MdOutlineLocationOn className="input-logo" />
             <input type="test" placeholder="Location" className="input" />
           </div>
-          <input type="checkbox" id="checkbox" className="check" />
-          <label htmlFor="checkbox">
-            By continuing you agree to our <span className="terms"> T&C </span>
-            and
-            <span className="terms"> Privacy policy</span>
-          </label>
+          <div>
+            <input type="checkbox" id="checkbox" className="input-checkbox" />
+            <label htmlFor="checkbox" className="label">
+              By continuing you agree to our
+              <span className="terms"> T&C </span>
+              and
+              <span className="terms"> Privacy policy</span>
+            </label>
+          </div>
           <br />
           <button type="submit" className="input-button">
             Proceed
           </button>
         </form>
+        <div className="discount-holder">
+          <div className="discount">
+            <p>
+              Get a Full Body Checkup Now at
+              <span className="line-through"> $5,999</span> $999
+            </p>
+          </div>
+          <div className="discount-price">
+            <p>70% off</p>
+          </div>
+        </div>
       </div>
       <div className="photo-container">
-        <h1>
+        <h1 className="style-head">
           <span className="head-span">Best in class</span> lab tests!
         </h1>
         <div className="brief">
@@ -77,7 +97,7 @@ const BestInClass = () => (
               alt="brief"
               className="brief-image"
             />
-            <p>Timely sample collection</p>
+            <p className="brief-text">Timely sample collection</p>
           </div>
           <div className="brief-details-2">
             <img
@@ -85,17 +105,35 @@ const BestInClass = () => (
               alt="brief"
               className="brief-image"
             />
-            <p>Complementary report consultation</p>
+            <p className="brief-text">Complementary report consultation</p>
           </div>
-          <div className="brief-details-3">
+          <div className="brief-details-1">
             <img
               src="data:image/jpeg;base64,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"
               alt="brief"
               className="brief-image"
             />
-            <p>Accurate timely reports</p>
+            <p className="brief-text">Accurate timely reports</p>
           </div>
         </div>
+      </div>
+    </div>
+    <div className="nabl-container">
+      <div className="nabl-holder">
+        <img
+          src="https://s3-alpha-sig.figma.com/img/7b99/275c/e91d102639f41043c322314c3ab279bd?Expires=1696204800&Signature=dGytCW8O8eWfcYCO~ORCzJ0JbWXFj~jWZZqZ0tIIlJJRGNmDfFDgR4RoBjiy1rzb6FOBQ6HNOOPKWRGURB-aXwhGBNSDP4hnBDRmr3tANmvwMnS~tmJZVvEGvk7N-tVA7no~cqyeyXoG6OnoPs7s3IbyEi3l6MJoZadR2ZBBK1bEIJtTu7U~hCJlY5ptzTMz-sa~Vm8uq19pAAV7g~mxqA-xoZqAtkmcxP3TaA5JLCTSf0I8jIFH8J07yJzMlnoch3F0lYW7QqdUnt1ydYkJfbkqBXbOPUGNWGE-6Qc5hDr0DUs~W6KRHN9ayHrqTz~WJdV7O92YcZMo~1xE8WIaVA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+          alt="nabl"
+          className="nabl-logo"
+        />
+        <p className="nabl-text">NABL Accredited Labs</p>
+      </div>
+      <div className="nabl-holder">
+        <img
+          alt="nabl"
+          src="https://s3-alpha-sig.figma.com/img/c4c5/3b3c/48b6f09ac6397f001423d9fc2925bf16?Expires=1696204800&Signature=FX7Ld7dMMqyB2hjbYpYPEKm~3MKNrebVJsxuYOMN3eUSYEdNMZ3Njv-ozO4gPAZUAFrZ9be4hmwHkFoqDyPfnWKFKmXmsDlfnBohjMHjcxTR6d~tJIB5yvGx7wEhxhVKik47LjMebFc1CsRjyPccFlPgPKg5a7~P5fBpnUxuA~C6qLAd-HBCjDwUzTmrsMdOC7sRvDxszd1TD-h~VBd7J-8Umh6riQxwQWORvuDXIpbuWG3Kr6tetYFtX6812K0kKW6CTaqg6dqTqor4UCZ019M44TJLSdEQoWS1th5EluLra3ZSXDXqFKstGWfiyFk16LsDenl~3FtIAMmg6locJA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+          className="nabl-logo"
+        />
+        <p className="nabl-text">Free sample collection</p>
       </div>
     </div>
   </>

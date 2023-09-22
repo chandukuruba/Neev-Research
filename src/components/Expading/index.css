@@ -1,50 +1,75 @@
-.assets {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 30px;
-}
-.assets-1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.expading-item {
+  min-width: 151px;
+  min-height: 79px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  border: 1px solid #138ed1;
+  background: #138ed1;
   text-align: center;
-  margin: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 10px;
 }
-@media (max-width: 768px) {
-  .assets {
-    flex-direction: column;
-  }
-  h1 {
-    font-size: 36px;
-  }
+.expand-head {
+  color: #fff;
+  text-shadow: 0px 4px 50px #75cfff;
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 100% */
 }
-.expading {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+.expand-para {
+  color: #fff;
+  font-family: Montserrat;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 30px; /* 150% */
 }
 .expading-list {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
   align-items: center;
-  padding: 30px;
+  justify-content: center;
+  margin-top: 80px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
 }
-.expading-item {
-  background-color: #3b82d9;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-radius: 10px;
-  border: none;
-  color: white;
-  min-width: 100px;
-  text-align: center;
-  margin: 10px;
-  height: 60px;
+.expanding {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
-p {
-  margin: 0px;
+@media screen and (max-width: 768px) {
+  .expading-item {
+    width: 151px;
+    height: 79px;
+    flex-shrink: 0;
+    margin-top: 10px;
+  }
+  .expand-head {
+    color: #fff;
+    text-shadow: 0px 4px 50px #75cfff;
+    font-family: Montserrat;
+    font-size: 2-px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+  }
+  .expand-para {
+    color: #fff;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 30px;
+    margin: 0px;
+    padding: 0px;
+  }
+  .expading-list {
+    margin-top: 20px;
+    padding: 0px;
+  }
 }

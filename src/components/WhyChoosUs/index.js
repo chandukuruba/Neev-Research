@@ -1,91 +1,200 @@
-import {Component} from 'react'
-import ListDetails from '../ListDetails'
+import {useState} from 'react'
+import {AiFillCaretRight} from 'react-icons/ai'
+import {ImCross} from 'react-icons/im'
 import './index.css'
 
-const listDetails = [
-  {
-    id: 1,
-    content:
-      'Get accurate and safe results from our NABL-certified lab parents.',
-    head: 'NABL Accredited Labs',
-    isDisplay: false,
-    logo:
-      'data:image/jpeg;base64,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',
-  },
-  {
-    id: 2,
-    content:
-      'Experience seamless care without the hassle of waiting in long lines for an appointment. Book with us for an healthier lifestyle.',
-    head: 'Value experience',
-    logo:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcN4vzMpbONZDrM4-O2YBVpqkaNnHNaxXrig&usqp=CAU',
-    isDisplay: false,
-  },
-  {
-    id: 3,
-    content:
-      'We collect sample timely to prevent treatment delays and prevent your continued well-being.',
-    head: 'Timely collection',
-    logo:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcN4vzMpbONZDrM4-O2YBVpqkaNnHNaxXrig&usqp=CAU',
-    isDisplay: false,
-  },
-  {
-    id: 4,
-    content:
-      'Enjoy hassel free medical assistance our transparent approach. We prioritize transparence for your smooth medical journey.',
-    head: 'Transparency',
-    logo:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgkfqTx2gZjCKFJSsugh0XQP7tT3mWb37TWw&usqp=CAU',
-    isDisplay: false,
-  },
-]
+const WhyChooseUs = () => {
+  const [isDisplay1, setDisplay1] = useState(false)
+  const [isDisplay2, setDisplay2] = useState(false)
+  const [isDisplay3, setDisplay3] = useState(false)
+  const [isDisplay4, setDisplay4] = useState(false)
 
-class WhyChooseUs extends Component {
-  state = {list: listDetails}
-
-  onChange = id => {
-    this.setState(prevState => {
-      const {list} = prevState
-      const filterData = list.filter(each => {
-        if (each.id === id) {
-          const {isDisplay} = each
-          return {...each, isDisplay: !isDisplay}
-        }
-        return each
-      })
-      return {list: filterData}
-    })
+  const onClick1 = () => {
+    setDisplay1(prevState => !prevState)
   }
 
-  render() {
-    const {list} = this.state
-    return (
-      <>
-        <div className="head-container">
-          <h1>
-            Why
-            <span className="head-span">choose</span> us?
-          </h1>
-          <p className="para">
-            We want your heart to be healthy so you can love a happy life!
-          </p>
-        </div>
-        <div className="choose-us-section">
-          <ul className="content-box">
-            {list.map(each => (
-              <ListDetails data={each} key={each.id} onChange={this.onChange} />
-            ))}
-          </ul>
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-RU_vaGIQv4YEwVbh9UVbL-7BA-XzLtXcwQ&usqp=CAU"
-            alt="doctor"
-            className="doctor-image"
-          />
-        </div>
-      </>
-    )
+  const onClick2 = () => {
+    setDisplay2(prevState => !prevState)
   }
+
+  const onClick3 = () => {
+    setDisplay3(prevState => !prevState)
+  }
+
+  const onClick4 = () => {
+    setDisplay4(prevState => !prevState)
+  }
+
+  return (
+    <div className="why-us-section">
+      <h1 className="style-head">
+        Why <span className="head-span">choose</span> us?
+      </h1>
+      <p className="package-para">
+        We want you and your heart to be healthy so you can live a happy life!
+      </p>
+      <div className="why-section-back">
+        <div className="why-section-list">
+          <div className="why-section-item-desktop">
+            <div className="why-section-head-container">
+              <img
+                src="https://s3-alpha-sig.figma.com/img/6018/3a9c/54faee57a4b5ceedd5ebe33ab7c68d08?Expires=1696204800&Signature=Nejier95nlOzRMo-h-fadbU8TeBqh9cSe7LenakZTsWskDoS1tdIet~MHhym6DBLsBBHl3-Vrzg2c2fid3hT0GBCY2i~8Z0LQCZUOUFcdgq6UxPuE7kL3FmEv6ZPfIERotHY3QrhdBi4CKmakcwIBNknaiKXcD3hrAd43UuhDLTedpKhMkTyXftedDSIX64~S4bvo6X9lRNmMuMiNThDkldQRi9ic7zLiLauGnAX~tMp8h3IjsxdLsqLm8SP4q7F6oBc~mDXea5Ju6B5OVGsuM632sR0CGOWXMwBp9gcK~qQpdqzr8mHqeeRzHheVaBwHiD5J1ivX-rJDwmatH~~EQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+                alt="nabl"
+                className="why-section-image"
+              />
+              <h1 className="why-section-head">NABL Accredited Labs</h1>
+            </div>
+            <p className="why-section-para">
+              Get accurate and safe results from our NABL-certified lab
+              partners.
+            </p>
+          </div>
+          <div className="why-section-item-desktop why-section-item-1">
+            <div className="why-section-head-container">
+              <img
+                src="https://s3-alpha-sig.figma.com/img/85ae/fb5b/cda70a4e1c2c0566bb3835493bd9fae6?Expires=1696204800&Signature=QmAF1hnnaPqx6zHzAzYB8x~sRN42S5nJOa6Ij8wIEm29SYZKhW7UvZDWWm~ROsijMNRbJxqQxEmZwA9qWU-sdrWbs5lZ0-zihwjYAcUDoarEpmqSuBF7WyyuyOw5vAmsny3TkPJ9mUkesovRLNCdgJljxlUu64EWLKzja4EvjIez17a9~oTWAUGvYDkJqu0caf~fFOjbS1yEevsZYNcAyWcURCRsyS92pDUGeXmr89BShaW1cZGjEmdNx8QcVR6~IgEeG8XZqdLeX4RMHl~Up2BTZUHOQads6nAaXHMuUQ3bNUJBsdyvxKU8Wal0-3JXDDyXWsICx5YbwWtbD1rcvg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+                alt="nabl"
+                className="why-section-image"
+              />
+              <h1 className="why-section-head">Value experience</h1>
+            </div>
+            <p className="why-section-para">
+              Experience seamless care without the hassle of waiting in long
+              lines for an appointment. Book with us for a healthier lifestyle.
+            </p>
+          </div>
+          <div className="why-section-item-desktop">
+            <div className="why-section-head-container">
+              <img
+                src="https://s3-alpha-sig.figma.com/img/76aa/5506/5b16a88759861a9f8868d2bcc39ac494?Expires=1696204800&Signature=Fb35FbvjDnWAoCSgRydxuEtU8qAtkrFiSW1WMQdd-JvHOWsLTyXY~5tgBzSMsLBPbl0PrU~z97OT9qWKnKm8NYdZL20jNMccOpHsN5oz81EKCTvbaAc9v3ec4Je5T7m~136Yt-Oi0SE4vsyVYV31XmPLEY-0tPvGGfauFrRQ7SVhXaG-lpvuIN9Toj1jJ7ldw7cy-MqcmgI7KoM6u6khLKXifXkxdSwh0HMea1CtUhKOr1AjTlpU7rrcjsDtwkGkfqP15r~CB67Usy8Y71WiDibKz0Kh1tliXJvTkK1GhMCvmGiRL8uYni7sSxkvtc-qIFNRJuKEgqpidzbIsasP6g__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+                alt="nabl"
+                className="why-section-image"
+              />
+              <h1 className="why-section-head">Timely collections</h1>
+            </div>
+            <p className="why-section-para">
+              We collect samples timely to prevent treatment delays and ensure
+              your continued well-being.
+            </p>
+          </div>
+          <div className="why-section-item-desktop why-section-item-1">
+            <div className="why-section-head-container">
+              <img
+                src="https://s3-alpha-sig.figma.com/img/b927/be19/477a4dbd9106f27a0a5849429422bdb7?Expires=1696204800&Signature=gj3nqiMtnqTMM8794Ncm2pwIO40DSG6VP8GX9WKAVopZrlSNf4WDZLDbCAvbXQeYaFA4Is~TCrh1PYPSiWiF-iiTz~h7-KtoSOt3cCpqmb6z-fjqn7JKtCyvY-9KT8ooiY1EnpHlSX1ymZXvSpyYx0TSM6H1Rv9li8kkQfu6K-J7iD0m4tJtITDKbPo4xM1qMwgPVM2yCbgRBaxTQfDk6LEYi5B6pE7S4YhomeXE6f9degkuACbV8pdaafFdhEeY-O~vMdPF5JCgtUE5YcMtr34lh7yIFN3ePYSIu5TTOAWnymWewOR4anvgmZGc2dUqjIhqlm3I-pwOnm32eNrFpA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+                alt="nabl"
+                className="why-section-image"
+              />
+              <h1 className="why-section-head">Transparency</h1>
+            </div>
+            <p className="why-section-para">
+              Enjoy hassle free medical assistance with our transparent
+              approach. We prioritize transparency for your smooth
+              medical journey.
+            </p>
+          </div>
+          <div className="why-section-item-mobile">
+            <img
+              src="https://s3-alpha-sig.figma.com/img/6018/3a9c/54faee57a4b5ceedd5ebe33ab7c68d08?Expires=1696204800&Signature=Nejier95nlOzRMo-h-fadbU8TeBqh9cSe7LenakZTsWskDoS1tdIet~MHhym6DBLsBBHl3-Vrzg2c2fid3hT0GBCY2i~8Z0LQCZUOUFcdgq6UxPuE7kL3FmEv6ZPfIERotHY3QrhdBi4CKmakcwIBNknaiKXcD3hrAd43UuhDLTedpKhMkTyXftedDSIX64~S4bvo6X9lRNmMuMiNThDkldQRi9ic7zLiLauGnAX~tMp8h3IjsxdLsqLm8SP4q7F6oBc~mDXea5Ju6B5OVGsuM632sR0CGOWXMwBp9gcK~qQpdqzr8mHqeeRzHheVaBwHiD5J1ivX-rJDwmatH~~EQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+              alt="nabl"
+              className="why-section-image"
+            />
+            <div>
+              <h1 className="why-section-head">NABL Accredited Labs</h1>
+              {isDisplay1 && (
+                <p className="why-section-para">
+                  Get accurate and safe results from our NABL-certified lab
+                  partners.{' '}
+                </p>
+              )}
+            </div>
+            <button type="button" className="button" onClick={onClick1}>
+              {isDisplay1 ? (
+                <ImCross className="arrow-logo" />
+              ) : (
+                <AiFillCaretRight className="arrow-logo" />
+              )}
+            </button>
+          </div>
+          <div className="why-section-item-mobile">
+            <img
+              src="https://s3-alpha-sig.figma.com/img/76aa/5506/5b16a88759861a9f8868d2bcc39ac494?Expires=1696204800&Signature=Fb35FbvjDnWAoCSgRydxuEtU8qAtkrFiSW1WMQdd-JvHOWsLTyXY~5tgBzSMsLBPbl0PrU~z97OT9qWKnKm8NYdZL20jNMccOpHsN5oz81EKCTvbaAc9v3ec4Je5T7m~136Yt-Oi0SE4vsyVYV31XmPLEY-0tPvGGfauFrRQ7SVhXaG-lpvuIN9Toj1jJ7ldw7cy-MqcmgI7KoM6u6khLKXifXkxdSwh0HMea1CtUhKOr1AjTlpU7rrcjsDtwkGkfqP15r~CB67Usy8Y71WiDibKz0Kh1tliXJvTkK1GhMCvmGiRL8uYni7sSxkvtc-qIFNRJuKEgqpidzbIsasP6g__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+              alt="nabl"
+              className="why-section-image"
+            />
+            <div>
+              <h1 className="why-section-head">Timely collections</h1>
+              {isDisplay2 && (
+                <p className="why-section-para">
+                  We collect samples timely to prevent treatment delays and
+                  ensure your continued well-being.
+                </p>
+              )}
+            </div>
+            <button type="button" className="button" onClick={onClick2}>
+              {isDisplay2 ? (
+                <ImCross className="arrow-logo" />
+              ) : (
+                <AiFillCaretRight className="arrow-logo" />
+              )}
+            </button>
+          </div>
+          <div className="why-section-item-mobile">
+            <img
+              src="https://s3-alpha-sig.figma.com/img/85ae/fb5b/cda70a4e1c2c0566bb3835493bd9fae6?Expires=1696204800&Signature=QmAF1hnnaPqx6zHzAzYB8x~sRN42S5nJOa6Ij8wIEm29SYZKhW7UvZDWWm~ROsijMNRbJxqQxEmZwA9qWU-sdrWbs5lZ0-zihwjYAcUDoarEpmqSuBF7WyyuyOw5vAmsny3TkPJ9mUkesovRLNCdgJljxlUu64EWLKzja4EvjIez17a9~oTWAUGvYDkJqu0caf~fFOjbS1yEevsZYNcAyWcURCRsyS92pDUGeXmr89BShaW1cZGjEmdNx8QcVR6~IgEeG8XZqdLeX4RMHl~Up2BTZUHOQads6nAaXHMuUQ3bNUJBsdyvxKU8Wal0-3JXDDyXWsICx5YbwWtbD1rcvg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+              alt="nabl"
+              className="why-section-image"
+            />
+            <div>
+              <h1 className="why-section-head">Value experience</h1>
+              {isDisplay3 && (
+                <p className="why-section-para">
+                  Experience seamless care without the hassle of waiting in long
+                  lines for an appointment. Book with us for a
+                  healthier lifestyle.
+                </p>
+              )}
+            </div>
+            <button type="button" className="button" onClick={onClick3}>
+              {isDisplay3 ? (
+                <ImCross className="arrow-logo" />
+              ) : (
+                <AiFillCaretRight className="arrow-logo" />
+              )}
+            </button>
+          </div>
+          <div className="why-section-item-mobile">
+            <img
+              src="https://s3-alpha-sig.figma.com/img/b927/be19/477a4dbd9106f27a0a5849429422bdb7?Expires=1696204800&Signature=gj3nqiMtnqTMM8794Ncm2pwIO40DSG6VP8GX9WKAVopZrlSNf4WDZLDbCAvbXQeYaFA4Is~TCrh1PYPSiWiF-iiTz~h7-KtoSOt3cCpqmb6z-fjqn7JKtCyvY-9KT8ooiY1EnpHlSX1ymZXvSpyYx0TSM6H1Rv9li8kkQfu6K-J7iD0m4tJtITDKbPo4xM1qMwgPVM2yCbgRBaxTQfDk6LEYi5B6pE7S4YhomeXE6f9degkuACbV8pdaafFdhEeY-O~vMdPF5JCgtUE5YcMtr34lh7yIFN3ePYSIu5TTOAWnymWewOR4anvgmZGc2dUqjIhqlm3I-pwOnm32eNrFpA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+              alt="nabl"
+              className="why-section-image"
+            />
+            <div>
+              <h1 className="why-section-head">Transparency</h1>
+              {isDisplay4 && (
+                <p className="why-section-para">
+                  Enjoy hassle free medical assistance with our transparent
+                  approach. We prioritize transparency for your smooth
+                  medical journey.
+                </p>
+              )}
+            </div>
+            <button type="button" className="button" onClick={onClick4}>
+              {isDisplay4 ? (
+                <ImCross className="arrow-logo" />
+              ) : (
+                <AiFillCaretRight className="arrow-logo" />
+              )}
+            </button>
+          </div>
+        </div>
+        <img
+          src="https://res.cloudinary.com/dyukfze9f/image/upload/v1695144640/expressive-young-woman-posing-studio-removebg-preview-transformed_1_myub3t.png"
+          alt="doctor"
+          className="doctor-image"
+        />
+      </div>
+    </div>
+  )
 }
 
 export default WhyChooseUs
